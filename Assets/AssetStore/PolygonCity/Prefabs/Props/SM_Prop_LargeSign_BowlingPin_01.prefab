@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 429584}
   - component: {fileID: 3300866}
   - component: {fileID: 2386818}
-  - component: {fileID: 64640046933892330}
+  - component: {fileID: 3006880057820493172}
   m_Layer: 0
   m_Name: SM_Prop_LargeSign_BowlingPin_01
   m_TagString: Untagged
@@ -82,8 +82,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &64640046933892330
-MeshCollider:
+--- !u!65 &3006880057820493172
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -92,7 +92,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43000228561530568, guid: 108df2069e3302c4280a82283cdfa41d, type: 2}
+  serializedVersion: 2
+  m_Size: {x: 1.6311648, y: 5.1555524, z: 1.631218}
+  m_Center: {x: -0.0011596681, y: -0.0016944411, z: 0.007806778}
