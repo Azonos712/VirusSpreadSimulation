@@ -109,7 +109,7 @@ namespace RTS_Cam
 
         private Vector2 KeyboardInput
         {
-            get { return useKeyboardInput ? new Vector2(Input.GetAxis(horizontalAxis), Input.GetAxis(verticalAxis)) : Vector2.zero; }
+            get { return useKeyboardInput ? new Vector2(Input.GetAxisRaw(horizontalAxis), Input.GetAxisRaw(verticalAxis)) : Vector2.zero; }
         }
 
         private Vector2 MouseInput
@@ -211,7 +211,7 @@ namespace RTS_Cam
                 Vector3 desiredMove = new Vector3(KeyboardInput.x, 0, KeyboardInput.y);
 
                 desiredMove *= keyboardMovementSpeed;
-                desiredMove *= Time.deltaTime;
+                desiredMove *= Time.unscaledDeltaTime;
                 desiredMove = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, 0f)) * desiredMove;
                 desiredMove = m_Transform.InverseTransformDirection(desiredMove);
 
@@ -231,7 +231,7 @@ namespace RTS_Cam
                 desiredMove.z = upRect.Contains(MouseInput) ? 1 : downRect.Contains(MouseInput) ? -1 : 0;
 
                 desiredMove *= screenEdgeMovementSpeed;
-                desiredMove *= Time.deltaTime;
+                desiredMove *= Time.unscaledDeltaTime;
                 desiredMove = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, 0f)) * desiredMove;
                 desiredMove = m_Transform.InverseTransformDirection(desiredMove);
 
@@ -243,7 +243,7 @@ namespace RTS_Cam
                 Vector3 desiredMove = new Vector3(-MouseAxis.x, 0, -MouseAxis.y);
 
                 desiredMove *= panningSpeed;
-                desiredMove *= Time.deltaTime;
+                desiredMove *= Time.unscaledDeltaTime;
                 desiredMove = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, 0f)) * desiredMove;
                 desiredMove = m_Transform.InverseTransformDirection(desiredMove);
 
@@ -258,9 +258,9 @@ namespace RTS_Cam
         {
             float distanceToGround = DistanceToGround();
             if(useScrollwheelZooming)
-                zoomPos += -ScrollWheel * Time.deltaTime * scrollWheelZoomingSensitivity;
+                zoomPos += -ScrollWheel * Time.unscaledDeltaTime * scrollWheelZoomingSensitivity;
             if (useKeyboardZooming)
-                zoomPos += ZoomDirection * Time.deltaTime * keyboardZoomingSensitivity;
+                zoomPos += ZoomDirection * Time.unscaledDeltaTime * keyboardZoomingSensitivity;
 
             zoomPos = Mathf.Clamp01(zoomPos);
 
@@ -271,7 +271,7 @@ namespace RTS_Cam
                 difference = targetHeight - distanceToGround;
 
             m_Transform.position = Vector3.Lerp(m_Transform.position, 
-                new Vector3(m_Transform.position.x, targetHeight + difference, m_Transform.position.z), Time.deltaTime * heightDampening);
+                new Vector3(m_Transform.position.x, targetHeight + difference, m_Transform.position.z), Time.unscaledDeltaTime * heightDampening);
         }
 
         /// <summary>
@@ -280,10 +280,10 @@ namespace RTS_Cam
         private void Rotation()
         {
             if(useKeyboardRotation)
-                transform.Rotate(Vector3.up, RotationDirection * Time.deltaTime * rotationSped, Space.World);
+                transform.Rotate(Vector3.up, RotationDirection * Time.unscaledDeltaTime * rotationSped, Space.World);
 
             if (useMouseRotation && Input.GetKey(mouseRotationKey))
-                m_Transform.Rotate(Vector3.up, -MouseAxis.x * Time.deltaTime * mouseRotationSpeed, Space.World);
+                m_Transform.Rotate(Vector3.up, -MouseAxis.x * Time.unscaledDeltaTime * mouseRotationSpeed, Space.World);
         }
 
         /// <summary>
@@ -292,7 +292,7 @@ namespace RTS_Cam
         private void FollowTarget()
         {
             Vector3 targetPos = new Vector3(targetFollow.position.x, m_Transform.position.y, targetFollow.position.z) + targetOffset;
-            m_Transform.position = Vector3.MoveTowards(m_Transform.position, targetPos, Time.deltaTime * followingSpeed);
+            m_Transform.position = Vector3.MoveTowards(m_Transform.position, targetPos, Time.unscaledDeltaTime * followingSpeed);
         }
 
         /// <summary>
