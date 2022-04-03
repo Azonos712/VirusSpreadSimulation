@@ -23,6 +23,7 @@ public class HumanModelVisualization : MonoBehaviour
 
     private void SetOutlineSettings(GameObject child)
     {
+        if (HealthStatusVisualization.Instance == null) return;
         Outline outline = child.AddComponent<Outline>();
         outline.enabled = HealthStatusVisualization.Instance.IsEnable;
     }
@@ -31,5 +32,4 @@ public class HumanModelVisualization : MonoBehaviour
     {
         child.AddComponent<HumanMovementAnimator>();
     }
-
 }
