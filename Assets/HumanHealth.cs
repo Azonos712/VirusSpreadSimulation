@@ -41,7 +41,7 @@ public class HumanHealth : MonoBehaviour
         if (CityParams.InitiallyInfectedPeople > 0)
         {
             Status = HealthStatus.Infected;
-            HumanStatistics.Instance.IncreaseNumOfInfectedHumans();
+            HumanStatistics.Instance?.IncreaseNumOfInfectedHumans();
             CityParams.InitiallyInfectedPeople--;
         }
 
@@ -63,8 +63,8 @@ public class HumanHealth : MonoBehaviour
         if (TimeToRecovery <= 0)
         {
             Status = HealthStatus.Recovered;
-            HumanStatistics.Instance.IncreaseNumOfRecoveredHumans();
-            HumanStatistics.Instance.DecreaseNumOfInfectedHumans();
+            HumanStatistics.Instance?.IncreaseNumOfRecoveredHumans();
+            HumanStatistics.Instance?.DecreaseNumOfInfectedHumans();
         }
 
         TimeToRecovery -= Time.deltaTime;
@@ -85,7 +85,7 @@ public class HumanHealth : MonoBehaviour
             if (UnityEngine.Random.value < chance)
             {
                 Status = HealthStatus.Infected;
-                HumanStatistics.Instance.IncreaseNumOfInfectedHumans();
+                HumanStatistics.Instance?.IncreaseNumOfInfectedHumans();
             }
         }
     }

@@ -33,7 +33,7 @@ public class HomePlace : BasePlace
             _numberOfHumansToSpawn--;
             _spawnTimer = Random.Range(5, 50);
 
-            HumanStatistics.Instance.IncreaseNumOfHumans();
+            HumanStatistics.Instance?.IncreaseNumOfHumans();
         }
         _spawnTimer -= Time.deltaTime;
     }

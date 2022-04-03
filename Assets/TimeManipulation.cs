@@ -17,5 +17,4 @@ public class TimeManipulation : MonoBehaviour
 
         _timeScale = Time.timeScale;
     }
-
 }
