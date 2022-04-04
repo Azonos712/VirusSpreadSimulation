@@ -13,6 +13,11 @@ public class AudioSettingsController : MonoBehaviour
     [SerializeField] private float _defaultVolume;
     private WaitForSeconds _sleepTime = new WaitForSeconds(2);
 
+    public void Awake()
+    {
+        AudioListener.volume = PlayerPrefs.GetFloat("masterVolume");
+    }
+
     public void OpenSettings()
     {
         _volumeSlider.value = PlayerPrefs.GetFloat("masterVolume");
@@ -28,19 +33,14 @@ public class AudioSettingsController : MonoBehaviour
     {
         AudioListener.volume = _currentVolume;
         PlayerPrefs.SetFloat("masterVolume", AudioListener.volume);
-        StartCoroutine(ConfirmationBox());
+
+        _confirmationBox.SetActive(false);
+        _confirmationBox.SetActive(true);
     }
 
     public void VolumeReset()
     {
         AudioListener.volume = _defaultVolume;
         _volumeSlider.value = _defaultVolume;
-    }
-
-    public IEnumerator ConfirmationBox()
-    {
-        _confirmationBox.SetActive(true);
-        yield return _sleepTime;
-        _confirmationBox.SetActive(false);
     }
 }
