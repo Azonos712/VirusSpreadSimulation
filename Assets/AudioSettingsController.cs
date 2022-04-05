@@ -8,16 +8,16 @@ public class AudioSettingsController : MonoBehaviour
     [SerializeField] private Slider _volumeSlider;
     [SerializeField] private GameObject _confirmationBox;
     [SerializeField] private float _currentVolume;
-    [SerializeField] private float _defaultVolume;
 
     public void Awake()
     {
-        AudioListener.volume = PlayerPrefs.GetFloat("masterVolume");
+        AudioListener.volume = PlayerPrefs.HasKey("masterVolume") ? PlayerPrefs.GetFloat("masterVolume") : 1;
     }
 
     public void OpenSettings()
     {
-        _volumeSlider.value = PlayerPrefs.GetFloat("masterVolume");
+        _volumeSlider.value = AudioListener.volume;
+        _volumeTextValue.text = AudioListener.volume.ToString("0.0");
     }
 
     public void SetVolume(float volume)
@@ -37,7 +37,6 @@ public class AudioSettingsController : MonoBehaviour
 
     public void VolumeReset()
     {
-        AudioListener.volume = _defaultVolume;
-        _volumeSlider.value = _defaultVolume;
+        _volumeSlider.value = 1;
     }
 }
