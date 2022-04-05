@@ -7,13 +7,9 @@ public class GraphicsSettingsController : MonoBehaviour
 {
     [SerializeField] private GameObject _confirmationBox;
 
-    [SerializeField] private Slider _brightnessSlider;
-    [SerializeField] private TMP_Text _brightnessTextValue;
-    [SerializeField] private float _defaultBrightness = 1;
-    private float _brightnessLevel;
-
     [SerializeField] private TMP_Dropdown _resolutionDropdown;
     [SerializeField] private Resolution[] _resolutions;
+    private int _resolutionIndex;
 
     [SerializeField] private TMP_Dropdown _qualityDropdown;
     [SerializeField] private Toggle _fullScreenToggle;
@@ -21,7 +17,19 @@ public class GraphicsSettingsController : MonoBehaviour
     private int _qualityLevel;
     private bool _isFoolScreen;
 
-    private void Start()
+    public void Awake()
+    {
+        FillResolutionDropdown();
+
+        QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("masterQuality"));
+        Screen.fullScreen = PlayerPrefs.GetInt("masterFullScreen") == 1 ? true : false;
+        _isFoolScreen = Screen.fullScreen;
+        _resolutionIndex = PlayerPrefs.GetInt("masterResolution");
+        Resolution resolution = _resolutions[_resolutionIndex];
+        Screen.SetResolution(resolution.width, resolution.height, _isFoolScreen);
+    }
+
+    private void FillResolutionDropdown()
     {
         _resolutions = Screen.resolutions;
         _resolutionDropdown.ClearOptions();
@@ -42,16 +50,18 @@ public class GraphicsSettingsController : MonoBehaviour
         _resolutionDropdown.RefreshShownValue();
     }
 
-    public void SetResolution(int resolutionIndex)
+    public void OpenSettings()
     {
-        Resolution resolution = _resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        _qualityDropdown.value = PlayerPrefs.GetInt("masterQuality");
+
+        _fullScreenToggle.isOn = PlayerPrefs.GetInt("masterFullScreen") == 1 ? true : false;
+
+        _resolutionDropdown.value = PlayerPrefs.GetInt("masterResolution");
     }
 
-    public void SetBrightness(float brightness)
+    public void SetResolution(int resolutionIndex)
     {
-        _brightnessLevel = brightness;
-        _brightnessTextValue.text = brightness.ToString("0.0");
+        _resolutionIndex = resolutionIndex;
     }
 
     public void SetFullScreen(bool value)
@@ -66,13 +76,15 @@ public class GraphicsSettingsController : MonoBehaviour
 
     public void GraphicsApply()
     {
-        PlayerPrefs.SetFloat("masterBrightness", _brightnessLevel);
-
         PlayerPrefs.SetInt("masterQuality", _qualityLevel);
         QualitySettings.SetQualityLevel(_qualityLevel);
 
         PlayerPrefs.SetInt("masterFullScreen", _isFoolScreen ? 1 : 0);
         Screen.fullScreen = _isFoolScreen;
+
+        Resolution resolution = _resolutions[_resolutionIndex];
+        PlayerPrefs.SetInt("masterResolution", _resolutionIndex);
+        Screen.SetResolution(resolution.width, resolution.height, _isFoolScreen);
 
         _confirmationBox.active = false;
         _confirmationBox.active = true;
@@ -80,9 +92,6 @@ public class GraphicsSettingsController : MonoBehaviour
 
     public void SettingsReset()
     {
-        _brightnessSlider.value = _defaultBrightness;
-        _brightnessTextValue.text = _defaultBrightness.ToString("0.0");
-
         _qualityDropdown.value = 1;
 
         _fullScreenToggle.isOn = true;
