@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.sabresaurus.playerprefseditor": "file:C:/Users/Intel/Downloads/PlayerPrefsEditor-1.4.0/PlayerPrefsEditor-1.4.0",
     "com.unity.collab-proxy": "1.9.0",
     "com.unity.ide.rider": "2.0.7",
     "com.unity.ide.visualstudio": "2.0.11",
