@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +9,6 @@ public class AudioSettingsController : MonoBehaviour
     [SerializeField] private GameObject _confirmationBox;
     [SerializeField] private float _currentVolume;
     [SerializeField] private float _defaultVolume;
-    private WaitForSeconds _sleepTime = new WaitForSeconds(2);
 
     public void Awake()
     {
