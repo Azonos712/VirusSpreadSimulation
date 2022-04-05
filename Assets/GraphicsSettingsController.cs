@@ -13,7 +13,10 @@ public class GraphicsSettingsController : MonoBehaviour
     private float _brightnessLevel;
 
     [SerializeField] private TMP_Dropdown _resolutionDropdown;
-    [SerializeField] Resolution[] _resolutions;
+    [SerializeField] private Resolution[] _resolutions;
+
+    [SerializeField] private TMP_Dropdown _qualityDropdown;
+    [SerializeField] private Toggle _fullScreenToggle;
 
     private int _qualityLevel;
     private bool _isFoolScreen;
@@ -73,5 +76,17 @@ public class GraphicsSettingsController : MonoBehaviour
 
         _confirmationBox.active = false;
         _confirmationBox.active = true;
+    }
+
+    public void SettingsReset()
+    {
+        _brightnessSlider.value = _defaultBrightness;
+        _brightnessTextValue.text = _defaultBrightness.ToString("0.0");
+
+        _qualityDropdown.value = 1;
+
+        _fullScreenToggle.isOn = true;
+
+        _resolutionDropdown.value = _resolutions.Length - 1;
     }
 }
