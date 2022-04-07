@@ -16,8 +16,10 @@ public class AsyncSceneLoader : MonoBehaviour
 
     private IEnumerator LoadLevelCoroutine(int index)
     {
-        _progressBar.fillAmount = 0;
         _loaderCanvas.SetActive(true);
+        yield return new WaitForSeconds(1f);
+
+        _progressBar.fillAmount = 0;
 
         var scene = SceneManager.LoadSceneAsync(index);
         scene.allowSceneActivation = false;
