@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
 
@@ -16,5 +14,10 @@ public class ActivityPlaces : MonoBehaviour
 
             return Array.AsReadOnly(_activityPlaces);
         }
+    }
+
+    private void Awake()
+    {
+        _activityPlaces = FindObjectsOfType<ActivityPlace>();
     }
 }

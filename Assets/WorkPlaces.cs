@@ -15,4 +15,9 @@ public class WorkPlaces : MonoBehaviour
             return Array.AsReadOnly(_workPlaces);
         }
     }
+
+    private void Awake()
+    {
+        _workPlaces = FindObjectsOfType<WorkPlace>();
+    }
 }

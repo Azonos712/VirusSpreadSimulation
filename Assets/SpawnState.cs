@@ -8,6 +8,7 @@ public class SpawnState : IState
     {
         return HumanStateId.Spawn;
     }
+
     public void Enter(HumanBehavior human)
     {
         GetRandomWork(human);
