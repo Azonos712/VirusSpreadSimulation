@@ -40,9 +40,9 @@ public class HumanHealth : MonoBehaviour
 
         if (CityParams.InitiallyInfectedPeople > 0)
         {
+            CityParams.InitiallyInfectedPeople--;
             Status = HealthStatus.Infected;
             HumanStatistics.Instance?.IncreaseNumOfInfectedHumans();
-            CityParams.InitiallyInfectedPeople--;
         }
 
         if (UnityEngine.Random.value < HumanParams.ChanceToWearMask)

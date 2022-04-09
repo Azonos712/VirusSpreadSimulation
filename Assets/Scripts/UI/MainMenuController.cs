@@ -1,25 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
-    [SerializeField] private string _simulationScene;
+    [SerializeField] private SimulationSettingsController _sumulationSettings;
+    [SerializeField] private AsyncSceneLoader _sceneLoader;
 
     public void StartSimulation()
     {
-        SceneManager.LoadScene(_simulationScene);
+        CityParams.InitiallyInfectedPeople = _sumulationSettings.GetInfected();
+        _sceneLoader.LoadLevel(1);
     }
 
     public void Exit()
     {
         Application.Quit();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }
