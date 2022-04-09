@@ -11,6 +11,7 @@ public class AsyncSceneLoader : MonoBehaviour
 
     public void LoadLevel(int index)
     {
+        //CityParams.InitiallyInfectedPeople = 
         StartCoroutine(LoadLevelCoroutine(index));
     }
 
