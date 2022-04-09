@@ -1,32 +1,20 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SimulationSettingsController : MonoBehaviour
 {
-    [SerializeField] private Slider _infectedSlider;
     [SerializeField] private TMP_Text _infectedText;
+    [SerializeField] private Slider _infectedSlider;
+    [SerializeField] private TMP_Text _chanceToInfecteText;
+    [SerializeField] private Slider _chanceToInfecteSlider;
 
-    public void SetInfected(float value)
-    {
-        _infectedText.text = Math.Truncate(value).ToString();// value.ToString("0");
-    }
-    public int GetInfected()
-    {
-        return (int)Math.Truncate(_infectedSlider.value);
-    }
+    public void SetInfected(float value) => _infectedText.text = Math.Truncate(value).ToString();
 
-    void Start()
-    {
+    public int GetInfected() => (int)Math.Truncate(_infectedSlider.value);
 
-    }
+    public void SetChanceToGetInfected(float value) => _chanceToInfecteText.text = Math.Truncate(value * 100).ToString() + "%";
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    public float GetChanceToGetInfected() => _chanceToInfecteSlider.value;
 }
