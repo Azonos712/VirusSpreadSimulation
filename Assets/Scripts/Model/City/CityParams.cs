@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CityParams : MonoBehaviour
+public class CityParams
 {
     public static int MinHumansAtHome { get; } = 1;
     public static int MaxHumansAtHome { get; } = 6;
