@@ -3,6 +3,7 @@ using UnityEngine;
 public class TimeManipulation : MonoBehaviour
 {
     [SerializeField] private float _timeScale;
+    private float _lastTimeScale;
 
     public void SetTimeScaleByKeyCode(KeyCode key)
     {
@@ -16,5 +17,16 @@ public class TimeManipulation : MonoBehaviour
         };
 
         _timeScale = Time.timeScale;
+    }
+
+    public void StopTime()
+    {
+        _lastTimeScale = Time.timeScale;
+        Time.timeScale = 0f;
+    }
+
+    public void ResumeTime()
+    {
+        Time.timeScale = _lastTimeScale;
     }
 }
