@@ -7,6 +7,7 @@ public class MainMenuController : MonoBehaviour
 
     public void StartSimulation()
     {
+        CityParams.MaxHumansAtHome = _sumulationSettings.GetPopulation();
         CityParams.InitiallyInfectedPeople = _sumulationSettings.GetInfected();
         HumanParams.ChanceToGetInfected = _sumulationSettings.GetChanceToGetInfected();
         HumanParams.ChanceToWearMask = _sumulationSettings.GetChanceToWearMask();
