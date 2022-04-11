@@ -26,7 +26,7 @@ public class HumanStatistics : MonoBehaviour
         else
             _instance = this;
 
-        DontDestroyOnLoad(gameObject);// Теперь нам нужно указать, чтобы объект не уничтожался при переходе на другую сцену игры
+        //DontDestroyOnLoad(gameObject);// Теперь нам нужно указать, чтобы объект не уничтожался при переходе на другую сцену игры
 
         Initialize();// И запускаем собственно инициализатор
     }
