@@ -32,7 +32,7 @@ public class HumanHealth : MonoBehaviour
 
     public float TimeToRecovery = 0f;
 
-    public bool HasMask;
+    public bool HasMask => UnityEngine.Random.value < HumanParams.ChanceToWearMask;
 
     void Start()
     {
@@ -44,10 +44,6 @@ public class HumanHealth : MonoBehaviour
             Status = HealthStatus.Infected;
             HumanStatistics.Instance?.IncreaseNumOfInfectedHumans();
         }
-
-        if (UnityEngine.Random.value < HumanParams.ChanceToWearMask)
-            HasMask = true;
-
     }
 
     void Update()
@@ -80,7 +76,7 @@ public class HumanHealth : MonoBehaviour
                 chance /= 1.5f;
 
             if (anotherHuman.HasMask)
-                chance /= 3f;
+                chance /= 2.5f;
 
             if (UnityEngine.Random.value < chance)
             {
