@@ -11,6 +11,7 @@ public class MainMenuController : MonoBehaviour
         CityParams.InitiallyInfectedPeople = _sumulationSettings.GetInfected();
         HumanParams.ChanceToGetInfected = _sumulationSettings.GetChanceToGetInfected();
         HumanParams.ChanceToWearMask = _sumulationSettings.GetChanceToWearMask();
+        HumanParams.ChanceToGoOnIsolation = _sumulationSettings.GetChanceToIsolation();
         _sceneLoader.LoadLevel(1);
     }
 
