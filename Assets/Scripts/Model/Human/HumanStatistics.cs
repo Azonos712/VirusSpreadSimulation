@@ -40,9 +40,4 @@ public class HumanStatistics : MonoBehaviour
     public void IncreaseNumOfInfectedHumans() => _infectedHumanCount++;
     public void DecreaseNumOfInfectedHumans() => _infectedHumanCount--;
     public void IncreaseNumOfRecoveredHumans() => _recoveredHumanCount++;
-
-    private void Update()
-    {
-        //Debug.Log(HumanCount);
-    }
 }

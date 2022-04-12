@@ -27,8 +27,15 @@ public class HomeState : IState
 
         if (human.TimeRemainingInCurrentState <= 0)
         {
-            var nextState = Random.value <= 0.5 ? HumanStateId.GoToWork : HumanStateId.GoToActivity;
-            human.StateMachine.ChangeState(nextState);
+            if (human.HealthStatus == HealthStatus.Infected && UnityEngine.Random.value < HumanParams.ChanceToGoOnIsolation)
+            {
+                human.StateMachine.ChangeState(HumanStateId.GoToHome);
+            }
+            else
+            {
+                var nextState = Random.value <= 0.5 ? HumanStateId.GoToWork : HumanStateId.GoToActivity;
+                human.StateMachine.ChangeState(nextState);
+            }
         }
 
         _restTimeTick -= Time.deltaTime;
@@ -37,6 +44,5 @@ public class HomeState : IState
 
     public void Exit(HumanBehavior human)
     {
-
     }
 }

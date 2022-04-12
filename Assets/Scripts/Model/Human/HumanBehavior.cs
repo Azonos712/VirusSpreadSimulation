@@ -4,6 +4,7 @@ using UnityEngine;
 public class HumanBehavior : MonoBehaviour
 {
     private HumanNavMesh _navMesh;
+    private HumanHealth _health;
     [SerializeField] private HumanStateId _currentState; // просто для отображения
     private HumanStateMachine _stateMachine;
     [SerializeField] private GameObject _currentObject;
@@ -14,6 +15,8 @@ public class HumanBehavior : MonoBehaviour
     private WorkPlace _work;
     private HomePlace _home;
     private ActivityPlace _activity;
+
+    public HealthStatus HealthStatus => _health.Status;
 
     public float TimeRemainingInCurrentState;
     public bool Arrived => _navMesh.Arrived;
@@ -54,6 +57,7 @@ public class HumanBehavior : MonoBehaviour
     void Start()
     {
         _navMesh = GetComponent<HumanNavMesh>();
+        _health = GetComponent<HumanHealth>();
 
         _stateMachine = new HumanStateMachine(this);
         _stateMachine.RegisterState(new SpawnState());

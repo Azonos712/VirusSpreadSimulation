@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public static class HumanParams
 {
     public static float MinSpeed { get; } = 1.8f;
@@ -14,4 +10,5 @@ public static class HumanParams
     public static float MaxInfectedTime { get; } = 1000f;//300
     public static float ChanceToGetInfected { get; set; } = 0.8f;
     public static float ChanceToWearMask { get; set; } = 0.2f;
+    public static float ChanceToGoOnIsolation { get; set; } = 0.0f;
 }

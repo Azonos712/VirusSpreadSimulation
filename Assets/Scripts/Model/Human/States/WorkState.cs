@@ -16,7 +16,6 @@ public class WorkState : IState
     {
         _locationRadius = human.Work.LocationRadius;//human.Wor.GetComponent<WorkPlace>().LocationRadius;
         human.TimeRemainingInCurrentState = Random.Range(CityParams.MinHumansWorkTime, CityParams.MaxHumansWorkTime);
-        //human.WorkObject.Incre
     }
 
     public void Update(HumanBehavior human)
