@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
+using static UnityEngine.GraphicsBuffer;
 
 namespace RTS_Cam
 {
@@ -295,8 +296,15 @@ namespace RTS_Cam
         /// </summary>
         private void FollowTarget()
         {
-            Vector3 targetPos = new Vector3(targetFollow.position.x, m_Transform.position.y, targetFollow.position.z) + targetOffset;
+            var targetPos = new Vector3(targetFollow.position.x, targetFollow.position.y, targetFollow.position.z);
+            var lookPos = targetPos - m_Transform.position;
+
             m_Transform.position = Vector3.MoveTowards(m_Transform.position, targetPos, Time.unscaledDeltaTime * followingSpeed);
+
+            Quaternion lookRot = Quaternion.LookRotation(lookPos, Vector3.up);
+            float eulerY = lookRot.eulerAngles.y;
+            Quaternion rotation = Quaternion.Euler(m_Transform.eulerAngles.x, eulerY, m_Transform.eulerAngles.z);
+            m_Transform.rotation = rotation;
         }
 
         /// <summary>
