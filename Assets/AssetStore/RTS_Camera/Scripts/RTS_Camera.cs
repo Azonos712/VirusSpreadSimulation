@@ -262,6 +262,7 @@ namespace RTS_Cam
         private void HeightCalculation()
         {
             float distanceToGround = DistanceToGround();
+
             if (useScrollwheelZooming)
                 zoomPos += -ScrollWheel * Time.unscaledDeltaTime * scrollWheelZoomingSensitivity;
             if (useKeyboardZooming)
@@ -276,7 +277,7 @@ namespace RTS_Cam
                 difference = targetHeight - distanceToGround;
 
             m_Transform.position = Vector3.Lerp(m_Transform.position,
-                new Vector3(m_Transform.position.x, targetHeight + difference, m_Transform.position.z), Time.unscaledDeltaTime * heightDampening);
+                new Vector3(m_Transform.position.x, m_Transform.position.y + difference, m_Transform.position.z), Time.unscaledDeltaTime * heightDampening);
         }
 
         /// <summary>
@@ -345,8 +346,8 @@ namespace RTS_Cam
         {
             Ray ray = new Ray(m_Transform.position, Vector3.down);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, groundMask.value))
-                return (hit.point - m_Transform.position).magnitude;
+            if (Physics.Raycast(ray, out hit, 300, groundMask.value))
+                return (hit.point - (m_Transform.position)).magnitude;
 
             return 0f;
         }
