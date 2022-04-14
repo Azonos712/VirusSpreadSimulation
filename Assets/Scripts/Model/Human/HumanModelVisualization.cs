@@ -5,6 +5,7 @@ using UnityEngine;
 public class HumanModelVisualization : MonoBehaviour
 {
     [SerializeField] private GameObject[] _humanModels;
+    [SerializeField] private GameObject _selectionCircle;
 
     private void Awake()
     {
@@ -12,7 +13,7 @@ public class HumanModelVisualization : MonoBehaviour
         //Destroy(t.gameObject);
 
         //GameObject child = Instantiate(_humanModels[Random.Range(0, _humanModels.Length)]);
-        var child = transform.GetChild(Random.Range(0, this.transform.childCount)).gameObject;
+        var child = transform.GetChild(Random.Range(0, this.transform.childCount-1)).gameObject;
         child.SetActive(true);
         //child.transform.SetParent(transform, false);
 
@@ -32,4 +33,8 @@ public class HumanModelVisualization : MonoBehaviour
     {
         child.AddComponent<HumanMovementAnimator>();
     }
+
+    public void SelectThisObject() => _selectionCircle.SetActive(true);
+
+    public void DeselectThisObject() => _selectionCircle.SetActive(false);
 }
