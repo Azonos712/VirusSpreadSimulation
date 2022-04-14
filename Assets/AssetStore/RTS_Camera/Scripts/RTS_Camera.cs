@@ -302,10 +302,11 @@ namespace RTS_Cam
 
             m_Transform.position = Vector3.MoveTowards(m_Transform.position, targetPos, Time.unscaledDeltaTime * followingSpeed);
 
-            Quaternion lookRot = Quaternion.LookRotation(lookPos, Vector3.up);
+            Quaternion lookRot = Quaternion.LookRotation(lookPos.normalized, Vector3.up);
             float eulerY = lookRot.eulerAngles.y;
             Quaternion rotation = Quaternion.Euler(m_Transform.eulerAngles.x, eulerY, m_Transform.eulerAngles.z);
-            m_Transform.rotation = rotation;
+            m_Transform.rotation = Quaternion.Slerp(m_Transform.rotation, rotation, 0.01f);
+
         }
 
         /// <summary>
