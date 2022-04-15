@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CityParams
 {
+    public static bool NewSimulation { get; set; } = false;
     public static int MinHumansAtHome { get; } = 1;
     public static int MaxHumansAtHome { get; set; } = 4;
     public static int MinHumansWorkTime { get; } = 100;

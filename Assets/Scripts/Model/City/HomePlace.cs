@@ -21,6 +21,9 @@ public class HomePlace : BasePlace
 
     void Update()
     {
+        if (CityParams.NewSimulation)
+            return;
+
         if (_spawnTimer <= 0f && _numberOfHumansToSpawn > 0)
         {
             var human = Instantiate(_humanToSpawn, _placeCenter, Quaternion.identity);
