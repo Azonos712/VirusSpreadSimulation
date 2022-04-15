@@ -10,6 +10,7 @@ public class TargetSelector : MonoBehaviour
     private new Camera camera;
     public string targetsTag;
     private HumanModelVisualization _lastObject;
+    private HumanMovementAnimator _movementAnim;
 
     private void Start()
     {
@@ -31,6 +32,9 @@ public class TargetSelector : MonoBehaviour
                     cam.SetTarget(hit.transform);
                     _lastObject = hit.transform.root.gameObject.GetComponentInChildren<HumanModelVisualization>();
                     _lastObject?.SelectThisObject();
+
+                    _movementAnim = hit.transform.root.gameObject.GetComponentInChildren<HumanMovementAnimator>();
+                    cam.followingSpeed = _movementAnim.CurrentSpeed;
                 }
                 else
                 {

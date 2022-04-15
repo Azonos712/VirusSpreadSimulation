@@ -7,6 +7,7 @@ public class HumanMovementAnimator : MonoBehaviour
     private Animator _animator;
     private SkinnedMeshRenderer _renderer;
     private float _timer = 0.4f;
+    public float CurrentSpeed => _agent.speed;
 
     void Start()
     {
